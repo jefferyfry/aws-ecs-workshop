@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://jfrogtraining.github.io/aws-ecs-workshop/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
