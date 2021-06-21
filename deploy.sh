@@ -11,12 +11,24 @@ ls -l /usr/local/bin/aws
 
 sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 
+# Create registry creds
+echo '{
+  "username" : "$REG_USER",
+  "password" : "$REG_PASS"
+}' | envsubst > creds.json
+
+SECRETS_ARN=$(aws secretsmanager create-secret --name aws-ecs-workshop-secret \
+    --secret-string file://creds.json)
+    
 # Create task definition
 echo '{
   "containerDefinitions": [
     {
       "name": "aws-ecs-workshop",
       "image": "$IMAGE_NAME",
+      "repositoryCredentials": {
+            "credentialsParameter": "$SECRETS_ARN"
+        },
       "essential": true,
       "portMappings": [
         {
@@ -58,7 +70,7 @@ PUBLIC_SUBNET=$(aws ec2 describe-subnets --filter Name=tag:Name,Values=aws-ecs-w
 SEC_GROUP=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default Name=vpc-id,Values=$VPC_ID --query SecurityGroups[].GroupId --output text)
 
 echo "VPC ID is $VPC_ID"
-echo "Public Subnet are $PUBLIC_SUBNET"
+echo "Public Subnet is $PUBLIC_SUBNET"
 echo "Security Group is $SEC_GROUP"
 
 # Create the service
