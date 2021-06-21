@@ -20,6 +20,8 @@ echo '{
 SECRETS_ARN=$(aws secretsmanager create-secret --name aws-ecs-workshop-secret \
     --secret-string file://creds.json)
     
+echo "Secrets is $SECRETS_ARN"
+    
 # Create task definition
 echo '{
   "containerDefinitions": [
