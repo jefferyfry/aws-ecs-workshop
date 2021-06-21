@@ -45,12 +45,21 @@ echo '{
   "requiresCompatibilities": [
     "FARGATE"
   ],
+  "networkMode": "awsvpc",
   "cpu": "256",
   "memory": "1024"
 }' | envsubst > task_definition.json
 
 # Register task definition
 aws ecs register-task-definition --cli-input-json file://task_definition.json
+
+VPC_ID=$(aws ec2 describe-vpcs --filter Name=tag:Name,Values=aws-ecs-workshop --query Vpcs[].VpcId --output text)
+PUBLIC_SUBNET=$(aws ec2 describe-subnets --filter Name=tag:Name,Values=aws-ecs-workshop-public-subnet --query Subnets[].CidrBlock --output text)
+SEC_GROUP=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default Name=vpc-id,Values=$VPC_ID --query SecurityGroups[].GroupId --output text)
+
+echo "VPC ID is $VPC_ID"
+echo "Public Subnets are $PUBLIC_SUBNET"
+echo "Security Group is $SEC_GROUP"
 
 # Create the service
 aws ecs create-service \
@@ -59,6 +68,8 @@ aws ecs create-service \
   --task-definition aws-ecs-workshop \
   --desired-count 5 \
   --deployment-controller type=ECS \
-  --deployment-configuration "deploymentCircuitBreaker={enable=true,rollback=true},maximumPercent=200,minimumHealthyPercent=100"
+  --deployment-configuration "deploymentCircuitBreaker={enable=true,rollback=true},maximumPercent=200,minimumHealthyPercent=100" \
+  --network-configuration "awsvpcConfiguration={subnets=[$PUBLIC_SUBNET],securityGroups=[$SEC_GROUP],assignPublicIp=ENABLED}" \
+  --launch-type FARGATE \
   --platform-version 1.4.0
 
