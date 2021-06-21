@@ -1,7 +1,0 @@
-  { 
-     "packageType" : "docker", 
-     "rclass"  : "local", 
-     "xrayIndex":"true",
-     "description" : "docker repository for demo" , 
-     "key" : "docker-demo-qa-local"
-   } 
