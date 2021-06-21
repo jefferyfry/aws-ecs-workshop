@@ -4,7 +4,10 @@
         {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
-            "Action": "ecs:*",
+            "Action": [
+                "ecs:*",
+                "ec2:*"
+            ],
             "Resource": "*"
         }
     ]

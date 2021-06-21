@@ -54,11 +54,11 @@ echo '{
 aws ecs register-task-definition --cli-input-json file://task_definition.json
 
 VPC_ID=$(aws ec2 describe-vpcs --filter Name=tag:Name,Values=aws-ecs-workshop --query Vpcs[].VpcId --output text)
-PUBLIC_SUBNET=$(aws ec2 describe-subnets --filter Name=tag:Name,Values=aws-ecs-workshop-public-subnet --query Subnets[].CidrBlock --output text)
+PUBLIC_SUBNET=$(aws ec2 describe-subnets --filter Name=tag:Name,Values=aws-ecs-workshop-public-subnet --query Subnets[].SubnetId --output text)
 SEC_GROUP=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default Name=vpc-id,Values=$VPC_ID --query SecurityGroups[].GroupId --output text)
 
 echo "VPC ID is $VPC_ID"
-echo "Public Subnets are $PUBLIC_SUBNET"
+echo "Public Subnet are $PUBLIC_SUBNET"
 echo "Security Group is $SEC_GROUP"
 
 # Create the service
