@@ -49,5 +49,6 @@ aws ecs create-service \
   --task-definition aws-ecs-workshop \
   --desired-count 5 \
   --deployment-controller type=ECS \
-  --deployment-configuration "maximumPercent=200,minimumHealthyPercent=100,deploymentCircuitBreaker={enable=true,rollback=true}"
+  --deployment-configuration "deploymentCircuitBreaker={enable=true,rollback=true},maximumPercent=200,minimumHealthyPercent=100"
+  --platform-version 1.4.0
 
