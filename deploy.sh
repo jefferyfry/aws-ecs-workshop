@@ -45,7 +45,6 @@ echo '{
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "networkMode": "awsvpc",
   "cpu": "256",
   "memory": "1024"
 }' | envsubst > task_definition.json
