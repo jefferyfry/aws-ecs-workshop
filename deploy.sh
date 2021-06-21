@@ -17,7 +17,7 @@ echo '{
   "password" : "$REG_PASS"
 }' | envsubst > creds.json
 
-now=$(date)
+now=$(date +'%H%M%S%m%d%Y')
 
 SECRETS_ARN=$(aws secretsmanager create-secret --name aws-ecs-workshop-secret$now \
     --secret-string file://creds.json)
