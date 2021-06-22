@@ -19,7 +19,7 @@ echo '{
 
 now=$(date +'%H%M%S%m%d%Y')
 
-SECRETS_ARN=$(aws secretsmanager create-secret --name aws-ecs-workshop-secret$now \
+SECRETS_ARN=$(aws secretsmanager create-secret --name workshopsecret$now \
     --secret-string file://creds.json --query ARN --output text)
     
 echo "Secrets is $SECRETS_ARN"
