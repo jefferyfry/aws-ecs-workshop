@@ -17,9 +17,9 @@ echo '{
     {
       "name": "aws-ecs-workshop",
       "image": "$IMAGE_NAME",
-      {
-        "credentialsParameter" : "arn:aws:secretsmanager:us-west-2:096302395721:secret:workshopsecret04500606222021-9m41mM"
-      }
+      "repositoryCredentials": {
+            "credentialsParameter": "arn:aws:secretsmanager:us-west-2:096302395721:secret:workshopsecret04500606222021-9m41mM"
+        },
       "essential": true,
       "portMappings": [
         {
