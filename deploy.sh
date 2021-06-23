@@ -22,7 +22,7 @@ now=$(date +'%H%M%S%m%d%Y')
 SECRETS_ARN=$(aws secretsmanager create-secret --name workshopsecret$now \
     --secret-string file://creds.json --query ARN --output text)
     
-echo "Secrets is $SECRETS_ARN"
+echo "Secrets is '$SECRETS_ARN'"
     
 # Create task definition
 echo '{
@@ -73,9 +73,9 @@ VPC_ID=$(aws ec2 describe-vpcs --filter Name=tag:Name,Values=aws-ecs-workshop --
 PUBLIC_SUBNET=$(aws ec2 describe-subnets --filter Name=tag:Name,Values=aws-ecs-workshop-public-subnet --query Subnets[].SubnetId --output text)
 SEC_GROUP=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default Name=vpc-id,Values=$VPC_ID --query SecurityGroups[].GroupId --output text)
 
-echo "VPC ID is $VPC_ID"
-echo "Public Subnet is $PUBLIC_SUBNET"
-echo "Security Group is $SEC_GROUP"
+echo "VPC ID is '$VPC_ID'"
+echo "Public Subnet is '$PUBLIC_SUBNET'"
+echo "Security Group is '$SEC_GROUP'"
 
 # Create the service
 aws ecs create-service \
