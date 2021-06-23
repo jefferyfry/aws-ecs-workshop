@@ -106,7 +106,7 @@ pipelines:
             - docker login -u $int_{{ .Values.Artifactory.intName }}_user -p $int_{{ .Values.Artifactory.intName }}_apikey {{ .Values.Artifactory.server }}
             - export REG_USER=$int_{{ .Values.Artifactory.intName }}_user
             - export REG_PASS=$int_{{ .Values.Artifactory.intName }}_apikey
-            - export IMAGE_NAME={{ .Values.app.dockerImageName }}
+            - export IMAGE_NAME={{ .Values.app.dockerImageName }}:${run_number}
             - export AWS_ACCESS_KEY_ID=$int_{{ .Values.AWS.intName }}_accessKeyId
             - export AWS_SECRET_ACCESS_KEY=$int_{{ .Values.AWS.intName }}_secretAccessKey
             - chmod +x ./deploy.sh
