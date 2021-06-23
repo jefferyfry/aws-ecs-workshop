@@ -31,7 +31,7 @@ echo '{
       "name": "aws-ecs-workshop",
       "image": "$IMAGE_NAME",
       "repositoryCredentials": {
-            "credentialsParameter": "$SECRETS_ARN"
+            "credentialsParameter": $SECRETS_ARN
         },
       "essential": true,
       "portMappings": [
