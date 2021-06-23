@@ -37,7 +37,7 @@ echo '{
         "retries": 3,
         "command": [
           "CMD-SHELL",
-          "curl -f localhost/health || exit 2"
+          "curl -f http://localhost/health || exit 1"
         ],
         "timeout": 5,
         "interval": 5
