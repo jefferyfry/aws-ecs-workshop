@@ -10,19 +10,6 @@ unzip awscliv2.zip
 ls -l /usr/local/bin/aws
 
 sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
-
-# Create registry creds
-echo '{
-  "username" : "$REG_USER",
-  "password" : "$REG_PASS"
-}' | envsubst > creds.json
-
-now=$(date +'%H%M%S%m%d%Y')
-
-SECRETS_ARN=$(aws secretsmanager create-secret --name workshopsecret$now \
-    --secret-string file://creds.json --query ARN --output text)
-    
-echo "Secrets is '$SECRETS_ARN'"
     
 # Create task definition
 echo '{
@@ -30,9 +17,6 @@ echo '{
     {
       "name": "aws-ecs-workshop",
       "image": "$IMAGE_NAME",
-      "repositoryCredentials": {
-            "credentialsParameter": $SECRETS_ARN
-        },
       "essential": true,
       "portMappings": [
         {
@@ -57,6 +41,7 @@ echo '{
       }
     }
   ],
+  "executionRoleArn": "arn:aws:iam::096302395721:role/ecsTaskExecutionRole",
   "family": "aws-ecs-workshop",
   "requiresCompatibilities": [
     "FARGATE"
