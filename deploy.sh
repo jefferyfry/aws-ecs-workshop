@@ -32,16 +32,7 @@ echo '{
           "hostPort": 443,
           "protocol": "tcp"
         }
-      ],
-      "healthCheck": {
-        "retries": 3,
-        "command": [
-          "CMD-SHELL",
-          "curl -f http://localhost/health || exit 1"
-        ],
-        "timeout": 5,
-        "interval": 5
-      }
+      ]
     }
   ],
   "executionRoleArn": "arn:aws:iam::096302395721:role/ecsTaskExecutionRole",
