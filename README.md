@@ -1,5 +1,7 @@
 ## AWS DevOps Modernization with JFrog
 
+[![Git](https://app.soluble.cloud/api/v1/public/badges/9079ca78-2646-49f1-8e70-38130b3deb9a.svg?orgId=604336610407)](https://app.soluble.cloud/repos/details/github.com/jefferyfry/aws-ecs-workshop?orgId=604336610407)  
+
 The goal of DevOps is to allow your development teams to deliver quality software faster to your customers through continuous process improvement, leveraging the best of breed development tools and infrastructure, and utilizing software development and IT operations best practices. Your team must deliver software faster than your competitors in order to get features and fixes to your customers sooner.
 
 > Looking forward, as release cycles get shorter and microservices get smaller, we can imagine a world in which at any one time, our systems’ software is being updated. Effectively, software will become liquid in that products and services will be connected to “software pipes” that constantly stream updates into our systems and devices; liquid software continuously and automatically updating our systems with no human intervention.
